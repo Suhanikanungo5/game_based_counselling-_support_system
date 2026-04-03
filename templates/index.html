@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI Counseling Support</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome! 🌈</h1>
+        <p>Let's talk about your day.</p>
+        
+        <form action="/start" method="POST">
+            <input type="text" name="name" placeholder="Enter your name" required>
+            <input type="number" name="age" placeholder="Enter your age" required>
+            
+            <div style="margin: 20px 0; text-align: center;">
+                <label for="initial_mood" style="display:block; margin-bottom: 10px; font-weight: bold; color: #555;">
+                    How are you feeling right now?
+                </label>
+                <div style="display: flex; align-items: center; justify-content: space-between; background: #f9f9f9; padding: 10px; border-radius: 10px; border: 1px solid #ddd;">
+                    <span style="font-size: 1.5em;" title="Terrible">😞</span>
+                    
+                    <input type="range" id="initial_mood" name="initial_mood" min="0" max="10" value="5" 
+                           style="width: 70%; cursor: pointer;" 
+                           oninput="document.getElementById('mood_output').innerText = this.value">
+                           
+                    <span style="font-size: 1.5em;" title="Amazing">🤩</span>
+                </div>
+                <p style="margin-top: 10px; font-weight: bold; color: #2193b0;">
+                    Score: <span id="mood_output">5</span> / 10
+                </p>
+            </div>
+            
+            <button type="submit">Start Session</button>
+        </form>
+        
+        <br>
+        <a href="/reset">
+            <button style="background-color:red; color:white; padding:10px;">
+                Reset Learning
+            </button>
+        </a>
+        <a href="/qtable">
+            <button style="background-color:green; color:white; padding:10px;">
+                View Learning (Q-Table)
+            </button>
+        </a>
+    </div>
+</body>
+</html>

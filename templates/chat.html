@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chatting with AI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        /* CSS for the new Mood Meter */
+        .mood-tracker {
+            margin-bottom: 25px;
+            text-align: left;
+        }
+        .mood-bar-bg {
+            background-color: #e0e0e0;
+            border-radius: 10px;
+            height: 20px;
+            width: 100%;
+            overflow: hidden;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.2);
+        }
+        .mood-bar-fill {
+            height: 100%;
+            border-radius: 10px;
+            transition: width 0.5s ease-in-out, background-color 0.5s ease-in-out;
+            /* Calculate percentage: (mood / 10) * 100 */
+            width: {{ (mood_score / 10) * 100 }}%; 
+            
+            /* Color logic based on mood score */
+            {% if mood_score <= 3 %}
+                background-color: #ff4d4d; /* Red for low mood */
+            {% elif mood_score <= 6 %}
+                background-color: #ffcc00; /* Yellow for average */
+            {% else %}
+                background-color: #4CAF50; /* Green for good mood */
+            {% endif %}
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        
+        <div style="display: flex; justify-content: space-between; align-items: center; background-color: #fff3e0; padding: 10px 20px; border-radius: 15px; margin-bottom: 20px; border: 2px solid #ffb74d;">
+            <span style="font-weight: bold; color: #e65100; font-size: 1.1em;">🏆 Resilience Points</span>
+            <span style="font-weight: bold; color: #e65100; font-size: 1.3em;">{{ user_points }}</span>
+        </div>
+
+        <div class="mood-tracker">
+            <p style="margin: 0 0 5px 0; font-weight: bold; color: #555;">
+                AI Detected State (Mood): {{ mood_score }} / 10
+            </p>
+            <div class="mood-bar-bg">
+                <div class="mood-bar-fill"></div>
+            </div>
+        </div>
+        <hr style="border: 0; border-top: 1px solid #eee; margin-bottom: 20px;">
+
+        <div style="background-color: #e1f5fe; padding: 15px; border-radius: 15px 15px 15px 0px; text-align: left; margin-bottom: 20px; border-left: 4px solid #03a9f4;">
+            <p style="margin: 0; font-style: italic; color: #0277bd;">
+                <strong>Counselor AI:</strong> "{{ ai_feedback }}"
+            </p>
+        </div>
+
+        <h3>Step {{ step }} of 15</h3>
+        <p class="question-text" style="font-size: 1.2em; font-weight: bold;">{{ question }}</p>
+
+        <form action="/chat" method="POST">
+            {% for value, label in options %}
+                <button type="submit" name="mood" value="{{ value }}" class="btn-mood">
+                    {{ label }}
+                </button>
+            {% endfor %}
+        </form>
+        
+    </div>
