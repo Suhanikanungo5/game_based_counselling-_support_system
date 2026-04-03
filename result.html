@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Session Complete</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Great Job, {{ name }}! ✨</h1>
+        <p>{{ conclusion }}</p>
+        <a href="/" class="btn-mood" style="text-decoration:none; display:block;">Start New Session</a>
+    </div>
+</body>
+</html>

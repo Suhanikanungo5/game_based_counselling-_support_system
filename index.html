@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AI Counseling Support</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome! 🌈</h1>
+        <p>Let's talk about your day.</p>
+        <form action="/start" method="POST">
+            <input type="text" name="name" placeholder="Enter your name" required>
+            <input type="number" name="age" placeholder="Enter your age" required>
+            <button type="submit">Start Session</button>
+        </form>
+        <a href="/reset">
+        <button style="background-color:red; color:white; padding:10px;">
+        Reset Learning
+        </button>
+        </a>
+        <a href="/qtable">
+        <button style="background-color:green; color:white; padding:10px;">
+        View Learning (Q-Table)
+        </button>
+        </a>
+    </div>
+</body>
+</html>
